@@ -1,0 +1,9 @@
+.navbar{
+    background-color: rgb(3, 3, 3) !important;
+    /* #margin-left: 250px; */
+}
+
+.navbar-nav .nav-link {
+    color: white;
+  }
+

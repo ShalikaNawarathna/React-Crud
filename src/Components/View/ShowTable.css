@@ -1,0 +1,37 @@
+
+.custom-table {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin : 50px 20px;
+    padding: 70px;
+    margin-left: 70px;
+  }
+  .custom-table th,
+  .custom-table td{
+    font-size: 18px;
+    padding: 20px;
+  }
+
+  .custom-table th {
+    font-weight: bold;
+  }
+
+  .custom-table tr {
+    height: 50px;
+  }
+
+  .custom-table th:last-child,
+.custom-table td:last-child {
+  width: 250px;
+  text-align: center;
+}
+
+.addButton{
+  margin-left: 50px;
+}
+.title{
+  margin-top: 30px;
+  text-align: center;
+  font-size: 20px;
+}

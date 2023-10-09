@@ -1,0 +1,39 @@
+.dashboard-container{
+    display: fles;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: rgb(16, 12, 12) ;
+    color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  .visible {
+    display: block;
+  }
+
+  .hidden {
+    display: none;
+  }
+  .navbar-width {
+    width: 100%;
+  }
+
+  .navbar{
+    background-color: rgb(3, 3, 3);
+    /* #margin-left: 250px; */
+}
+
+.bg-body-tertiary{
+  background-color: rgb(3, 3, 3) !important;
+}
