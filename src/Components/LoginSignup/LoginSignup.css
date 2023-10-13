@@ -3,9 +3,11 @@
     flex-direction: column;
     margin: auto;
     margin-top: 50px;
-    width: 600px;
+    width: 500%;
     background: #fff;
     padding-bottom: 30px;
+    align-items: center;
+    margin-left: 30px;
 }
 .header{
     display: flex;
@@ -127,6 +129,11 @@
     font-size: 14px;
     margin-top: 8px;
   }
+  .form-container{
+    display: flex !important;
+    justify-content: center !important;
+    width:1500px !important;
 
+  }
 
 

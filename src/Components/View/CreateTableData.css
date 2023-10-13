@@ -1,3 +1,89 @@
 .bold-label {
     font-weight: bold;
   }
+  .form-group{
+    margin-bottom: 1.5rem;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  .custom-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+
+  .custom-card .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .custom-card .form-control {
+    border-radius: 10px;
+  }
+
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+/* In your CSS file */
+body {
+  background-color: #f8f9fa;
+}
+
+
+
+.custom-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  /* Add left padding */
+  padding-left: 2rem;
+  margin-right: 13rem;
+  background-color: #fff;
+}
+.card-title{
+  padding-bottom: 2rem;
+}
+.title{
+  padding-right: 18rem;
+  padding-top: 5rem;
+}
+
+.form-check-input {
+  margin-left: 0.5rem;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  margin-right: 9rem;
+}
+.gender-label{
+  margin-right: 7rem;
+}
+/* .dashboard-container{
+  margin-bottom: 10rem;
+} */
+.footer-set{
+ padding-bottom: 20rem;
+}
+.main-content{
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+.submit-button{
+  margin-top: 1.5rem;
+  margin-left: 5rem;
+}
+
+
+
+

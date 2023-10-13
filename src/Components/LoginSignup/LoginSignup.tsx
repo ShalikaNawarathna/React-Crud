@@ -4,150 +4,147 @@ import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import GetUserByEmail from "../Server/GetUserByEmail";
+import bcrypt from "bcryptjs-react";
 
-interface FormData {
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export interface SignUpFormData {
   username: string;
   email: string;
   password: string;
 }
 
-const LoginSignup: React.FC = () => {
+export const LoginSignup: React.FC = () => {
   const [action, setAction] = useState("Sign Up");
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [formData, setFormData] = useState<FormData>({
+  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const [activeButton, setActiveButton] = useState<"login" | "signup">("login");
+  const [loginData, setLoginData] = useState<LoginFormData>({
+    email: "",
+    password: "",
+  });
+  const [formData, setFormData] = useState<SignUpFormData>({
     username: "",
     email: "",
     password: "",
   });
-  const [formValid, setFormValid] = useState(false);
 
   const renderSuccessMessage = () => (
     <div className="success">Successfully login...</div>
   );
-  const navigate = useNavigate();
 
-  const database = [
-    {
-      username: "Shalu",
-      password: "1234",
-    },
-    {
-      username: "Shalika",
-      password: "1234",
-    },
-  ];
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    //console.log(`Updated formData: ${JSON.stringify(formData)}`);
-    setFormValid(formData.username !== "" && formData.password !== "");
+    setLoginData({ ...loginData, [name]: value });
   };
 
   const handleSignUp = () => {
-    //event.preventDefault();
     setIsSignUpSuccess(true);
+    setIsLoginFormVisible(true);
+    navigate("/signup");
+    console.log("Sign Up");
   };
 
-  const handleLoginIn = () => {
-    if (formValid) {
-      if (formData.username && formData.password) {
-        navigate("./dashboard", { replace: true });
-      } else if (formData.username) {
-        setErrorMessage("Please enter your Password");
-      } else if (formData.password) {
-        setErrorMessage("Please enter your Username");
-      } else if (formData.username === "" || formData.password === "") {
-        setErrorMessage("Please enter your Credentials");
+  const handleLoginIn = async (event: FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const userResponse = await GetUserByEmail(loginData.email);
+      const hashedPassword = userResponse ? userResponse.password : null;
+      if (userResponse) {
+        console.log("User Response ", userResponse);
+        if (
+          hashedPassword &&
+          (await bcrypt.compare(loginData.password, hashedPassword))
+        ) {
+          navigate("./dashboard");
+          setLoginData({ email: "", password: "" });
+        } else {
+          setErrorMessage("Invalid email or password. Please try again.....");
+        }
       } else {
-        setErrorMessage("Check Again");
+        setErrorMessage("User not found. Please sign up.");
       }
+    } catch (error) {
+      console.error("Login Failed:", error);
+      setErrorMessage("Invalid email or password. Please try again.....");
     }
   };
 
   return (
-    <div className="form">
+    <div className="form-container">
       <form>
         <div className="container">
           <div className="header">
-            <div className="text">{action}</div>
+            <div className="text">Login</div>
             <div className="underline"></div>
           </div>
-          <div className="inputs">
-            {action === "Login" ? (
-              <div></div>
-            ) : (
-              <div className="input">
-                <img src={user_icon} alt="" />
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={formData.username}
-                  onChange={handleChange}
-                />
-              </div>
-            )}
+          <div style={{ marginBottom: "30px" }}></div>
+          <div className="row">
             <div className="input">
               <img src={email_icon} alt="" />
               <input
                 type="email"
                 name="email"
+                autoComplete="off"
                 placeholder="Email"
-                value={formData.email}
+                value={loginData.email}
                 onChange={handleChange}
+                style={{ width: "120%" }}
               />
             </div>
+          </div>
+          <div style={{ marginBottom: "40px" }}></div>
+          <div className="row">
             <div className="input">
               <img src={password_icon} alt="" />
               <input
                 type="password"
                 name="password"
+                autoComplete="off"
                 placeholder="Password"
-                value={formData.password}
+                value={loginData.password}
                 onChange={handleChange}
+                style={{ width: "100%" }}
               />
             </div>
           </div>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-          {action === "Sign Up" ? (
-            <div></div>
-          ) : (
-            <div className="forget-password">
-              Forget Password? <span>Click Here!</span>
-            </div>
-          )}
+          <div className="error-message">{errorMessage}</div>
           <div className="submit-container">
-            <div
-              className={action === "Login" ? "submit gray" : "submit"}
+            <button
+              className={activeButton === "signup" ? "submit" : "submit gray"}
               onClick={() => {
-                setAction("Sign Up");
-                console.log("Sign Up button clicked!");
+                setActiveButton("signup");
                 handleSignUp();
               }}
+              disabled={buttonClicked}
             >
               Sign Up
-            </div>
-            <div
-              className={action === "Sign Up" ? "submit gray" : "submit"}
-              onClick={() => {
-                setAction("Login");
-                console.log("Login button clicked!");
-                handleLoginIn();
+            </button>
+            <button
+              className={activeButton === "login" ? "submit" : "submit gray"}
+              onClick={(event) => {
+                setActiveButton("login");
+                handleLoginIn(event);
               }}
+              disabled={buttonClicked}
             >
               Login
-            </div>
+            </button>
           </div>
-          {isSignUpSuccess && (
-            <div className="success-message">
-              Successfully signed up! You need to login to the application.
-            </div>
-          )}
         </div>
       </form>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

@@ -1,0 +1,31 @@
+.footer{
+    position: fixed;
+    margin-bottom: 0px;
+    left: 250px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    margin-top: 10px;
+
+}
+
+  .flowbite-footer {
+    text-align: center;
+  }
+  /* Footer.css */
+
+/* .footer {
+  background-color: #f8f8f8;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+} */
+

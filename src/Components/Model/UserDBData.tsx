@@ -6,5 +6,6 @@ interface UserDBData {
   age: string;
   gender: string;
   university: string;
+  password: string;
 }
 export default UserDBData;
