@@ -2,38 +2,56 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import "./EditTableData.css";
-import TableData, { onUpdateUser } from "../Model/TableData";
 import NavBar from "../Dashboard/NavBar";
 import SideBar from "../Dashboard/SideBar";
+import UpdateUser from "../Server/UpdateUser";
+import UserDBData from "../Model/UserDBData";
+import GetUserByEmail from "../Server/GetUserByEmail";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import GetUserByIdDorEdit from "../Server/GetUserByIdDorEdit";
 
 const EditTableData = () => {
   const [sidebarVisibility, setSideBarVisibility] = useState(true);
   const [navBarWidth, setNavBarWidth] = useState(false);
+  const { email } = useParams();
+  const userEmail = email ? decodeURIComponent(email) : null;
+  //console.log("User Email:", userEmail);
 
   const toogleSideBar = () => {
     setSideBarVisibility(!sidebarVisibility);
     setNavBarWidth(!navBarWidth);
   };
-  const { id } = useParams();
-  const userId = id ? parseInt(id, 10) : null;
+
   //console.log(id);
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserDBData>({
     name: "",
     email: "",
     age: "",
     gender: "",
     university: "",
+    password: "",
   });
 
   useEffect(() => {
-    //find the user from matching id
-    const existingUser = TableData.find((item) => item.id === userId);
-    if (existingUser) {
-      setUser(existingUser);
+    if (userEmail !== null) {
+      GetUserByIdDorEdit(userEmail)
+        .then((response: any) => {
+          console.log("Response from API:", response.data);
+          if (response) {
+            const currentUser = response.data;
+            console.log("CUrretnt user", currentUser);
+            setUser(currentUser);
+          } else {
+            console.error("User data not found");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
-    // console.log("Exsting user ", existingUser);
-  }, [userId]);
+  }, [userEmail, user.email]);
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -42,19 +60,26 @@ const EditTableData = () => {
 
   const handleUpdate = (event: any) => {
     event.preventDefault();
-    if (userId !== null) {
+    if (userEmail !== null) {
       console.log("Before updating", user);
-      onUpdateUser({
-        id: userId,
-        ...user,
-      });
-      console.log("After updating", user);
-      navigate("/dashboard");
+      UpdateUser(user.email, user)
+        .then(() => {
+          console.log("User updated successfully ");
+          toast.warning(`${user.email} Updated successfully`);
+          navigate("/dashboard");
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(`Something went wrong updating the ${user.email}`);
+        });
     }
   };
 
   return (
     <div className="dashboard-container">
+      <div className="title">
+        <h2>Update Form</h2>
+      </div>
       <div
         className={`navbar ${
           navBarWidth ? "navbar-width" : ""
@@ -66,9 +91,9 @@ const EditTableData = () => {
         {<SideBar></SideBar>}
       </div>
       <div className="main-content">
-        <Card>
+        <Card className="custom-card">
           <Card.Body>
-            <Card.Title>Edit User</Card.Title>
+            <Card.Title className="card-title">Edit User Details...</Card.Title>
             <Form onSubmit={handleUpdate}>
               {
                 <div>
@@ -124,7 +149,7 @@ const EditTableData = () => {
 
                   <div className="row">
                     <div className="col mb-3">
-                      <label htmlFor="age" className="bold-label">
+                      <label htmlFor="age" className="bold-label gender-label">
                         Gender :
                       </label>
                       <div className="form-check">
@@ -170,10 +195,32 @@ const EditTableData = () => {
                           onChange={handleInputChange}
                         />
                       </div>
-                      <br />
-                      <button type="submit" className="btn btn-warning">
-                        Update User
-                      </button>
+                    </div>
+                    <br />
+                    <div className="row">
+                      <div className="col">
+                        <div className="form-group mb-3">
+                          <label htmlFor="password" className="bold-label">
+                            Password :
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="col">
+                        <button
+                          type="submit"
+                          className="btn btn-warning updateButton"
+                        >
+                          Update User
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

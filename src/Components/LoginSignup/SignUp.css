@@ -1,0 +1,14 @@
+
+.success{
+    text-align: center;
+    font-size: medium;
+    color: forestgreen;
+}
+
+
+.error-message{
+    text-align: center;
+    font-size: medium;
+    color: red;
+    font-weight: 700;
+}
