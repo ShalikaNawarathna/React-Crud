@@ -36,7 +36,7 @@
   border: 1px solid #ccc;
   font-size: 16px;
 }
-/* In your CSS file */
+
 body {
   background-color: #f8f9fa;
 }
@@ -45,13 +45,11 @@ body {
   background-color: #fff;
 }
 
-
 .custom-card {
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  /* Add left padding */
   padding-left: 2rem;
   margin-left: 500px
 

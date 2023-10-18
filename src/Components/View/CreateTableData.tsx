@@ -66,7 +66,7 @@ function CreateTableData() {
       university,
       password,
     };
-    //console.log("New User", newUser);
+
     CreateData(newUser)
       .then((response) => {
         console.log("User created succulfully", response);
@@ -87,9 +87,6 @@ function CreateTableData() {
     setNavBarWidth(!navBarWidth);
   };
 
-  // const onAddUser = (newUser: any) => {
-  //   setUsers([...users, newUser]);
-  // };
   return (
     <div>
       <div className="dashboard-container">
@@ -112,7 +109,7 @@ function CreateTableData() {
               <Card.Title className="card-title">
                 Enter User Details...
               </Card.Title>
-              {/* {progress !== null ? < value = {progress} max = "100"></} */}
+              {}
               <Form onSubmit={handleSubmit}>
                 {
                   <div>
@@ -252,13 +249,7 @@ function CreateTableData() {
             </Card.Body>
           </Card>
         </div>
-        {/* <div className="footer">
-          {isAddingUser && (
-            <div className="alert alert-info" role="alert">
-              Adding User...
-            </div>
-          )}
-        </div> */}
+        {}
       </div>{" "}
       {isAddingUser && (
         <div className="alert alert-info" role="alert">

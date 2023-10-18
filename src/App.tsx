@@ -6,7 +6,6 @@ import CreateTableData from "./Components/View/CreateTableData.tsx";
 import EditTableData from "./Components/View/EditTableData.tsx";
 import Footer from "./Components/Dashboard/Footer.tsx";
 import { SignUp } from "./Components/LoginSignup/SignUp.tsx";
-// import { SignUp } from "./Components/LoginSignup/SignUp.tsx";
 
 function App() {
   return (

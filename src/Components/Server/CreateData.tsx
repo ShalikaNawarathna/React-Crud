@@ -17,7 +17,7 @@ const CreateData = (userData: UserDBData) => {
       return response.data;
     })
     .catch((error) => {
-      console.log("Error of creating new user", error);
+      console.log(error);
     });
 };
 

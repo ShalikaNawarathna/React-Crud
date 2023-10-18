@@ -45,7 +45,6 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  /* Add left padding */
   padding-left: 2rem;
   margin-right: 13rem;
   background-color: #fff;
@@ -69,9 +68,6 @@ body {
 .gender-label{
   margin-right: 7rem;
 }
-/* .dashboard-container{
-  margin-bottom: 10rem;
-} */
 .footer-set{
  padding-bottom: 20rem;
 }
