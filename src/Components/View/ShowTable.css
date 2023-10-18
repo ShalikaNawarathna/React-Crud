@@ -3,10 +3,7 @@
     border: 2px solid #ccc;
     border-radius: 10px;
     width: 80%;
-    /* margin : 1rem auto; */
-    /* padding: 70px; */
     margin-left: 150px;
-    /* margin-top: 5px; */
     align-items: flex-start;
     margin-top: 2rem;
   }
@@ -39,7 +36,6 @@
   margin-left: 130px;
   text-align: center;
   font-size: 20px;
-  /* margin-bottom: 200px; */
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .last-column{
@@ -52,13 +48,9 @@
   align-items: center;
 }
 
-/* Style for the progress bar itself */
 progress {
-  width: 100px; /* Set your desired width */
+  width: 100px;
   height: 20px;
   align-items: center ;
   margin-left: 15rem !important;
-
-   /* Set your desired height */
-  /* Add any other styles you want for the progress bar */
 }

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 import { useNavigate } from "react-router-dom";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 
 interface NavBarProps {
   toggleSidebar: () => void;
@@ -15,9 +16,17 @@ const NavBar: React.FC<NavBarProps> = ({ toggleSidebar }) => {
   const navigateToLogin = () => {
     navigate("/", { replace: true });
   };
+
+  const navigateToBack = () => {
+    window.history.back();
+  };
+
   return (
     <nav className="navbar navbar-expand-lg  fixed-top p-4">
       <div className="container-fluid">
+        <button onClick={navigateToBack}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
         <button onClick={navigateToLogin}>
           <FontAwesomeIcon icon={faRightFromBracket} />
         </button>

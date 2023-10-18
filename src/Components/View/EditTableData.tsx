@@ -16,14 +16,10 @@ const EditTableData = () => {
   const [navBarWidth, setNavBarWidth] = useState(false);
   const { email } = useParams();
   const userEmail = email ? decodeURIComponent(email) : null;
-  //console.log("User Email:", userEmail);
-
   const toogleSideBar = () => {
     setSideBarVisibility(!sidebarVisibility);
     setNavBarWidth(!navBarWidth);
   };
-
-  //console.log(id);
   const navigate = useNavigate();
   const [user, setUser] = useState<UserDBData>({
     name: "",

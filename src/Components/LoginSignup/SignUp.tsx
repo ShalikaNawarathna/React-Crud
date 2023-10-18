@@ -9,7 +9,6 @@ import bcrypt from "bcryptjs-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export interface LoginFormData {
-  // username: string;
   email: string;
   password: string;
 }
@@ -77,15 +76,11 @@ export const SignUp: React.FC = () => {
         navigate("/");
         console.log("Successfully Signed Up");
       } else {
-        //toast.error("Sign Up Failed, please try again!!");
-        setErrorMessage("Sign Up Failed, please try again");
+        setErrorMessage("Sign Up Failed, This user email already exists.");
       }
     } catch (error) {
       console.log("Sign Up Failed, please try again");
       setErrorMessage("Sign Up Failed, please try again");
-      // toast.error("Sign Up Failed, please try again!!", {
-      //   containerId: "success-container",
-      // });
       console.log(error);
     }
   };

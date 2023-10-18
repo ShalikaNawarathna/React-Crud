@@ -38,7 +38,7 @@ const ShowTable = () => {
           prevUsers.filter((user) => user.email !== userId)
         );
         toast.error(`${userId} User Deleted successfully`);
-        handleClose(); // Close the modal after successful delete
+        handleClose();
       })
       .catch((error) => {
         console.log("Error deleting user ", error);
@@ -150,7 +150,7 @@ const ShowTable = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      {/* <div className="footer"></div> */}
+      {}
     </Fragment>
   );
 };
